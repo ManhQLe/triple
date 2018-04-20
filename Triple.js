@@ -11,6 +11,10 @@ class Triple
 
     }
 
+    general(){
+        return new Triple(this.cos(),this.sin(),1);
+    }
+
     tan(){
         return this.h/this.b
     }
@@ -32,7 +36,7 @@ class Triple
     }
 
     cotan(){
-    return this.b/this.h
+        return this.b/this.h
     }
 
     angle(){
