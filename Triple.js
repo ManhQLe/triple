@@ -11,6 +11,30 @@ class Triple
 
     }
 
+    tan(){
+        return this.h/this.b
+    }
+
+    sin(){
+        return this.h/this.d
+    }
+
+    cos(){
+        return this.b/this.d
+    }
+
+    cosec(){
+        return this.d/this.h
+    }
+
+    sec(){
+        return this.d/this.b
+    }
+
+    cotan(){
+    return this.b/this.h
+    }
+
     angle(){
         return Math.atan2(this.h,this.b);
     }
