@@ -12,7 +12,7 @@ class Triple
 
     }
 
-    general(){
+    unit(){
         return new Triple(this.cos(),this.sin(),1);
     }
 
@@ -97,7 +97,7 @@ Triple.COMMON = new Proxy(Triple,{
             case "T30":
                 return obj.fromAngle(30);                
             case "T45":
-                return obj.fromAngle(45);
+                return obj.fromAngle(45);            
         }
     }
 })
