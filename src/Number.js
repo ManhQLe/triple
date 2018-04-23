@@ -1,4 +1,6 @@
 const epsilon = 1e-8
+const radPerAngle = Math.PI/180
+const anglePerRad = 180/Math.PI
 module.exports={
     isSame(a, b) {
     return Math.abs(a-b) <=epsilon
@@ -15,5 +17,13 @@ module.exports={
             }while(x)        
         }
         return gcf
+    },
+    toRad(a){
+        return a*radPerAngle
+    },
+
+    toAngle(r){
+        return r*anglePerRad;
     }
+
 }

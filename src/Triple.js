@@ -70,12 +70,31 @@ class Triple
         return `${this.b} ${this.h} ${this.d}`
     }
 
+    rotateRad(rad=0){
+        return this.add(Triple.fromRad(rad));
+    }
+
+    rotate(ang=0){
+        return this.rotateRad(Number.toRad(ang))
+    }
+
+
+    radAngle(){
+        return Math.atan2(this.h,this.b);
+    }
+
+    angle(){
+        return Number.toAngle(Math.atan2(this.h,this.b))
+    }
+
+
+
     static fromRad(rad){
         return new  Triple(Math.cos(rad),Math.sin(rad))
     }
 
     static fromAngle(ang){
-        return Triple.fromRad(Math.PI*ang/180)
+        return Triple.fromRad(Number.rotateRad(ang))
     }    
 }
 
