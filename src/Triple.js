@@ -58,4 +58,16 @@ class Triple
             this.d * x.d
         )
     }
+
+    equals(x){
+        return Number.isSame(x.b,this.b)
+        && Number.isSame(x.h,this.h)
+        && Number.isSame(x.d,this.d)
+    }
+
+    toString(){
+        return `${this.b} ${this.h} ${this.d}`
+    }
 }
+
+module.exports = Triple
