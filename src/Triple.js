@@ -3,6 +3,7 @@ const Number = require('./Number')
 class Triple
 {
     constructor(b=0,h=1,d=1){
+
         if(!Number.isSame(b*b + h*h,d*d))
             throw "Invalid triple"
         this.b = b;
@@ -68,6 +69,37 @@ class Triple
     toString(){
         return `${this.b} ${this.h} ${this.d}`
     }
+
+    static fromRad(rad){
+        return new  Triple(Math.cos(rad),Math.sin(rad))
+    }
+
+    static fromAngle(ang){
+        return Triple.fromRad(Math.PI*ang/180)
+    }    
 }
+
+
+
+Triple.COMMON = new Proxy(Triple,{
+    get:function(obj,key){
+        switch(key){
+            case "T90":
+                return obj.fromAngle(90);
+            case "TN90":
+                return obj.fromAngle(-90);
+            case "T180":
+                return obj.fromAngle(180);
+            case "TN180":
+                return obj.fromAngle(-180);
+            case "T60":
+                return obj.fromAngle(60);
+            case "T30":
+                return obj.fromAngle(30);                
+            case "T45":
+                return obj.fromAngle(45);
+        }
+    }
+})
 
 module.exports = Triple
