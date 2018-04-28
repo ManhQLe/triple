@@ -11,6 +11,13 @@ class Triple {
 
     }
 
+    selfAdd(times){
+        let x = Triple.fromRad(0);
+        for(let i = 0;i<times;i++)
+            x = x.add(this)
+        return x;
+    }
+
     unit() {
         return new Triple(this.cos(), this.sin(), 1);
     }
@@ -86,14 +93,12 @@ class Triple {
         return Number.toAngle(Math.atan2(this.h, this.b))
     }
 
-
-
     static fromRad(rad) {
         return new Triple(Math.cos(rad), Math.sin(rad))
     }
 
     static fromAngle(ang) {
-        return Triple.fromRad(Number.rotateRad(ang))
+        return Triple.fromRad(Number.toRad(ang))
     }
 
     static fromSineOf(rad) {
