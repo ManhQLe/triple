@@ -119,7 +119,7 @@ Triple.FUNC = {
         return this.rotateRad(p,Number.toRad(ang),pivot);
     },
     rotateRad: (p,rad,pivot=[0,0])=>{        
-        let t = Triple.COMMON.fromRad(rad);
+        let t = Triple.fromRad(rad)
         let temp = [p[0]-pivot[0],p[1]-pivot[1]]
         return [
             t.b*temp[0] - t.h*temp[1] + pivot[0],

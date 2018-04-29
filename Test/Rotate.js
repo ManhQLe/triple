@@ -14,6 +14,8 @@ assert(t2.angle()==135)
 const p1 = [-2,5]
 const pivot= [1,7]
 
-const p2 = Triple.FUNC.rotate(p1,90,pivot);
+const p2 = Triple.FUNC.rotate(p1,-90,pivot);
 
-console.log(p2)
+assert(p2[0] == -1 && p2[1] == 10)
+
+console.log("Test passed")
