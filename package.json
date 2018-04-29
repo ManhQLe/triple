@@ -18,5 +18,8 @@
   "bugs": {
     "url": "https://github.com/ManhQLe/triple/issues"
   },
-  "homepage": "https://github.com/ManhQLe/triple#readme"
+  "homepage": "https://github.com/ManhQLe/triple#readme",
+  "devDependencies": {
+    "webpack": "^4.6.0"
+  }
 }
