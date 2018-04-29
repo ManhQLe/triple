@@ -1,9 +1,9 @@
-const Number = require('./Number')
+const numberDevice = require('./Number')
 
 class Triple {
     constructor(b = 0, h = 1, d = 1) {
 
-        if (!Number.isSame(b * b + h * h, d * d))
+        if (!numberDevice.isSame(b * b + h * h, d * d))
             throw "Invalid triple"
         this.b = b;
         this.h = h;
@@ -67,9 +67,9 @@ class Triple {
     }
 
     equals(x) {
-        return Number.isSame(x.b, this.b) &&
-            Number.isSame(x.h, this.h) &&
-            Number.isSame(x.d, this.d)
+        return numberDevice.isSame(x.b, this.b) &&
+            numberDevice.isSame(x.h, this.h) &&
+            numberDevice.isSame(x.d, this.d)
     }
 
     toString() {
@@ -81,7 +81,7 @@ class Triple {
     }
 
     rotate(ang = 0) {
-        return this.rotateRad(Number.toRad(ang))
+        return this.rotateRad(numberDevice.toRad(ang))
     }
 
 
@@ -90,7 +90,7 @@ class Triple {
     }
 
     angle() {
-        return Number.toAngle(Math.atan2(this.h, this.b))
+        return numberDevice.toAngle(Math.atan2(this.h, this.b))
     }
 
     static fromRad(rad) {
@@ -98,7 +98,7 @@ class Triple {
     }
 
     static fromAngle(ang) {
-        return Triple.fromRad(Number.toRad(ang))
+        return Triple.fromRad(numberDevice.toRad(ang))
     }
 
     static fromSineOf(rad) {
@@ -113,10 +113,10 @@ class Triple {
 
 Triple.FUNC = {
     getTripleFromPoint:(x,y)=>{
-        return new Triple(x,y,x*x+y*y);
+        return new Triple(x,y,Math.sqrt(x*x+y*y));
     },
     rotate:function(p,ang,pivot=[0,0]){
-        return this.rotateRad(p,Number.toRad(ang),pivot);
+        return this.rotateRad(p,numberDevice.toRad(ang),pivot);
     },
     rotateRad: (p,rad,pivot=[0,0])=>{        
         let t = Triple.fromRad(rad)
@@ -124,6 +124,13 @@ Triple.FUNC = {
         return [
             t.b*temp[0] - t.h*temp[1] + pivot[0],
             t.h*temp[0] + t.b*temp[1] + pivot[1]
+        ]
+    },
+    reflect:function(point, vec){
+        const t =  this.getTripleFromPoint(vec[0],vec[1]).unit().selfAdd(2)        
+        return [
+            t.b *point[0] + t.h*point[1],
+            t.h *point[0] - t.b *point[1]
         ]
     }
 }
