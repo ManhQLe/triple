@@ -1,5 +1,5 @@
 const assert = require("assert");
-const Triple = require("../src/Triple")
+const Triple = require("../src")
 
 const T90 = Triple.COMMON.T90
 const T180 = Triple.COMMON.T180

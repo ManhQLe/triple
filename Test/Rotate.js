@@ -1,5 +1,5 @@
 const assert = require("assert");
-const Triple = require("../src/Triple")
+const Triple = require("../src/index")
 
 
 const t1 = new Triple(1,1,Math.sqrt(2));
@@ -10,3 +10,10 @@ const t2 = t1.rotate(90)
 
 
 assert(t2.angle()==135)
+
+const p1 = [-2,5]
+const pivot= [1,7]
+
+const p2 = Triple.FUNC.rotate(p1,90,pivot);
+
+console.log(p2)

@@ -1,5 +1,5 @@
 const assert = require("assert");
-const Triple = require("../src/Triple")
+const Triple = require("../src")
 
 const t1 = Triple.fromAngle(45)
 

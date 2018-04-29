@@ -1,5 +1,5 @@
 const assert = require("assert");
-const Triple = require("../src/Triple")
+const Triple = require("../src")
 
 const x = new Triple(12,5,13);
 const y = x.add(x)
