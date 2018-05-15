@@ -1,13 +1,14 @@
 const numberDevice = require('./Number')
 
 class Triple {
-    constructor(b = 0, h = 1, d = 1) {
+    constructor(b = 0, h = 1) {
 
-        if (!numberDevice.isSame(b * b + h * h, d * d))
-            throw "Invalid triple"
-        this.b = b;
-        this.h = h;
-        this.d = d;
+        this.x = b;
+        this.y = h;
+        
+        Object.defineProperty(this,"d",{            
+            get(){return Math.sqrt(this.x*this.x + this.y*this.y)}            
+        })
 
     }
 
@@ -23,57 +24,56 @@ class Triple {
     }
 
     tan() {
-        return this.h / this.b
+        return this.y / this.x
     }
 
     sin() {
-        return this.h / this.d
+        return this.y / this.d
     }
 
     cos() {
-        return this.b / this.d
+        return this.x / this.d
     }
 
     cosec() {
-        return this.d / this.h
+        return this.d / this.y
     }
 
     sec() {
-        return this.d / this.b
+        return this.d / this.x
     }
 
     cotan() {
-        return this.b / this.h
+        return this.x / this.y
     }
 
     angle() {
-        return Math.atan2(this.h, this.b);
+        return Math.atan2(this.y, this.x);
     }
 
     add(x) {
         return new Triple(
-            this.b * x.b - this.h * x.h,
-            this.h * x.b + this.b * x.h,
+            this.x * x.x - this.y * x.y,
+            this.y * x.x + this.x * x.y,
             this.d * x.d
         )
     }
 
     sub(x) {
         return new Triple(
-            this.b * x.b + this.h * x.h,
-            this.h * x.b - this.b * x.h,
+            this.x * x.x + this.y * x.y,
+            this.y * x.x - this.x * x.y,
             this.d * x.d
         )
     }
 
     equals(x) {
-        return numberDevice.isSame(x.b, this.b) &&
-            numberDevice.isSame(x.h, this.h) &&
-            numberDevice.isSame(x.d, this.d)
+        return numberDevice.isSame(x.x, this.x) &&
+            numberDevice.isSame(x.y, this.y)
     }
 
     toString() {
-        return `${this.b} ${this.h} ${this.d}`
+        return `${this.x} ${this.y} ${this.d}`
     }
 
     rotateRad(rad = 0) {
@@ -86,11 +86,11 @@ class Triple {
 
 
     radAngle() {
-        return Math.atan2(this.h, this.b);
+        return Math.atan2(this.y, this.x);
     }
 
     angle() {
-        return numberDevice.toAngle(Math.atan2(this.h, this.b))
+        return numberDevice.toAngle(Math.atan2(this.y, this.x))
     }
 
     static fromRad(rad) {
@@ -122,15 +122,15 @@ Triple.FUNC = {
         let t = Triple.fromRad(rad)
         let temp = [p[0]-pivot[0],p[1]-pivot[1]]
         return [
-            t.b*temp[0] - t.h*temp[1] + pivot[0],
-            t.h*temp[0] + t.b*temp[1] + pivot[1]
+            t.x*temp[0] - t.y*temp[1] + pivot[0],
+            t.y*temp[0] + t.x*temp[1] + pivot[1]
         ]
     },
     reflect:function(point, vec){
         const t =  this.getTripleFromPoint(vec[0],vec[1]).unit().selfAdd(2)        
         return [
-            t.b *point[0] + t.h*point[1],
-            t.h *point[0] - t.b *point[1]
+            t.x *point[0] + t.y*point[1],
+            t.y *point[0] - t.x *point[1]
         ]
     }
 }
