@@ -1,22 +1,20 @@
 const numberDevice = require('./Number')
 
 class Triple {
-    constructor(x = 0, y = 1) {
+    constructor(b = 0, h = 1) {
 
-        this.x = x;
-        this.y = y;
-
-        Object.defineProperty(this, "d", {
-            get() {
-                return Math.sqrt(this.x * this.x + this.y * this.y)
-            }
+        this.x = b;
+        this.y = h;
+        
+        Object.defineProperty(this,"d",{            
+            get(){return Math.sqrt(this.x*this.x + this.y*this.y)}            
         })
 
     }
 
-    selfAdd(times) {
+    selfAdd(times){
         let x = Triple.fromRad(0);
-        for (let i = 0; i < times; i++)
+        for(let i = 0;i<times;i++)
             x = x.add(this)
         return x;
     }
@@ -69,6 +67,29 @@ class Triple {
         )
     }
 
+    double(n = 1) {
+        let {x,y} = this;
+        let x1, y1;
+        do {
+            x1 = x * x - y * y;
+            y1 = 2 * x * y;
+            x = x1;
+            y = y1;
+        } while (--n > 0);
+        return new Triple(x, y);
+    }
+
+    half(n=1){
+        let {x,y} = this;        
+        let x1, r;
+        do {
+            r = Math.sqrt(x*x+y*y);
+            x1 = x + r;            
+            x = x1;            
+        } while (--n > 0);
+        return new Triple(x, y);
+    }
+
     equals(x) {
         return numberDevice.isSame(x.x, this.x) &&
             numberDevice.isSame(x.y, this.y)
@@ -95,29 +116,6 @@ class Triple {
         return numberDevice.toAngle(Math.atan2(this.y, this.x))
     }
 
-    double(n = 1) {
-        let {x,y} = this;
-        let x1, y1;
-        do {
-            x1 = x * x - y * y;
-            y1 = 2 * x * y;
-            x = x1;
-            y = y1;
-        } while (--n > 0);
-        return new Triple(x, y);
-    }
-
-    half(n=1){
-        let {x,y} = this;        
-        let x1, r;
-        do {
-            r = Math.sqrt(x*x+y*y);
-            x1 = x + r;            
-            x = x1;            
-        } while (--n > 0);
-        return new Triple(x, y);
-    }
-
     static fromRad(rad) {
         return new Triple(Math.cos(rad), Math.sin(rad))
     }
@@ -134,31 +132,28 @@ class Triple {
         let cos = Math.cos(rad)
         return new Triple(cos, Math.sqrt(1 - cos * cos), 1)
     }
-    static fromCode(c, d = 1) {
-
-    }
 }
 
 Triple.FUNC = {
-    getTripleFromPoint: (x, y) => {
-        return new Triple(x, y, Math.sqrt(x * x + y * y));
+    getTripleFromPoint:(x,y)=>{
+        return new Triple(x,y,Math.sqrt(x*x+y*y));
     },
-    rotate: function (p, ang, pivot = [0, 0]) {
-        return this.rotateRad(p, numberDevice.toRad(ang), pivot);
+    rotate:function(p,ang,pivot=[0,0]){
+        return this.rotateRad(p,numberDevice.toRad(ang),pivot);
     },
-    rotateRad: (p, rad, pivot = [0, 0]) => {
+    rotateRad: (p,rad,pivot=[0,0])=>{        
         let t = Triple.fromRad(rad)
-        let temp = [p[0] - pivot[0], p[1] - pivot[1]]
+        let temp = [p[0]-pivot[0],p[1]-pivot[1]]
         return [
-            t.x * temp[0] - t.y * temp[1] + pivot[0],
-            t.y * temp[0] + t.x * temp[1] + pivot[1]
+            t.x*temp[0] - t.y*temp[1] + pivot[0],
+            t.y*temp[0] + t.x*temp[1] + pivot[1]
         ]
     },
-    reflect: function (point, vec) {
-        const t = this.getTripleFromPoint(vec[0], vec[1]).unit().selfAdd(2)
+    reflect:function(point, vec){
+        const t =  this.getTripleFromPoint(vec[0],vec[1]).unit().selfAdd(2)        
         return [
-            t.x * point[0] + t.y * point[1],
-            t.y * point[0] - t.x * point[1]
+            t.x *point[0] + t.y*point[1],
+            t.y *point[0] - t.x *point[1]
         ]
     }
 }

@@ -8,3 +8,4 @@ node ./test/Rotate.js
 node ./test/selfAddTest.js
 node ./test/StaticFunction.js
 node ./test/Sub.js
+node ./test/HalfAndDouble.js

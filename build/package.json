@@ -1,6 +1,6 @@
 {
-  "name": "triple",
-  "version": "1.0.1",
+  "name": "triple3",
+  "version": "1.0.2",
   "description": "Triple Mathematic",
   "main": "index.js",
   "scripts": {
@@ -14,7 +14,7 @@
     "url": "git+https://github.com/ManhQLe/triple.git"
   },
   "keywords": [
-    "triple"
+    "triple3"
   ],
   "author": "Manh Le",
   "license": "MIT",
