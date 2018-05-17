@@ -67,6 +67,29 @@ class Triple {
         )
     }
 
+    double(n = 1) {
+        let {x,y} = this;
+        let x1, y1;
+        do {
+            x1 = x * x - y * y;
+            y1 = 2 * x * y;
+            x = x1;
+            y = y1;
+        } while (--n > 0);
+        return new Triple(x, y);
+    }
+
+    half(n=1){
+        let {x,y} = this;        
+        let x1, r;
+        do {
+            r = Math.sqrt(x*x+y*y);
+            x1 = x + r;            
+            x = x1;            
+        } while (--n > 0);
+        return new Triple(x, y);
+    }
+
     equals(x) {
         return numberDevice.isSame(x.x, this.x) &&
             numberDevice.isSame(x.y, this.y)
